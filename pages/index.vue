@@ -50,6 +50,63 @@
           なんかいろいろ
         </v-card-text>
       </v-card>
+
+      <template>
+        <v-card class="mx-auto" max-width="344">
+          <v-img
+            src="/works/thumb/simpleGestures.png"
+            alt="simpleGestures"
+            height="200px"
+          ></v-img>
+
+          <v-card-title>
+            simpleGestures
+          </v-card-title>
+
+          <v-card-text>
+            <div>JavaScript / Chrome extension</div>
+            マウスジェスチャ機能を提供するためのGoogle Chrome拡張機能です。
+            軽量/簡単な設定・操作を目指しています。
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn text>
+              <a
+                href="https://chrome.google.com/webstore/detail/flfminafiamnggnldfpilnfnmbgmiegn"
+                target="_blank"
+                >App link</a
+              >
+            </v-btn>
+
+            <v-btn color="purple" text>
+              <a
+                href="https://github.com/RyutaKojima/simpleGestures"
+                target="_blank"
+                >GitHub</a
+              >
+            </v-btn>
+
+            <v-spacer></v-spacer>
+
+            <v-btn icon @click="showCardDetail = !showCardDetail">
+              <v-icon>{{
+                showCardDetail ? 'mdi-chevron-up' : 'mdi-chevron-down'
+              }}</v-icon>
+            </v-btn>
+          </v-card-actions>
+
+          <v-expand-transition>
+            <div v-show="showCardDetail">
+              <v-divider></v-divider>
+
+              <v-card-text>
+                Google Chromeでマウスジェスチャを行うための拡張機能です。
+                軽量/簡単な設定・操作を目指しています。
+              </v-card-text>
+            </div>
+          </v-expand-transition>
+        </v-card>
+      </template>
     </v-flex>
 
     <v-flex xs12 sm8 md6>
@@ -58,7 +115,12 @@
           コンタクト
         </v-card-title>
         <v-card-text>
-          <p>Twitter: {{ contact.twitter }}</p>
+          <template v-for="contact in contacts">
+            <p :key="contact.name">
+              {{ contact.name }}:
+              <a :href="contact.url">{{ contact.account }}</a>
+            </p>
+          </template>
         </v-card-text>
       </v-card>
     </v-flex>
@@ -70,16 +132,29 @@ export default {
   components: {},
   data() {
     return {
+      showCardDetail: false,
       profile: {
         firstName: '竜太',
         lastName: '小島',
         birthDate: '1988-02-13'
       },
-      contact: {
-        github: '',
-        twitter: '@kjm0213',
-        email: ''
-      },
+      contacts: [
+        {
+          name: 'GitHub',
+          account: 'RyutaKojima',
+          url: 'https://github.com/RyutaKojima'
+        },
+        {
+          name: 'Twitter',
+          account: '@kjm0213',
+          url: 'https://twitter.com/kjm0213'
+        },
+        {
+          name: 'email',
+          account: '',
+          url: ''
+        }
+      ],
       skills: [
         {
           color: 'indigo',
