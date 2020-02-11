@@ -51,57 +51,49 @@
         </v-card-text>
       </v-card>
 
-      <template>
-        <v-card class="mx-auto" max-width="344">
+      <template v-for="personalWork in personalWorks">
+        <v-card :key="personalWork.title" class="mx-auto" max-width="344">
           <v-img
-            src="/works/thumb/simpleGestures.png"
-            alt="simpleGestures"
+            :src="personalWork.imageUrl"
+            :alt="personalWork.title"
             height="200px"
           ></v-img>
 
           <v-card-title>
-            simpleGestures
+            {{ personalWork.title }}
           </v-card-title>
 
           <v-card-text>
-            <div>JavaScript / Chrome extension</div>
-            マウスジェスチャ機能を提供するためのGoogle Chrome拡張機能です。
-            軽量/簡単な設定・操作を目指しています。
+            <span v-html="personalWork.description"></span>
           </v-card-text>
 
           <v-card-actions>
-            <v-btn text>
-              <a
-                href="https://chrome.google.com/webstore/detail/flfminafiamnggnldfpilnfnmbgmiegn"
-                target="_blank"
-                >App link</a
-              >
+            <v-btn v-if="personalWork.links.app" text>
+              <a :href="personalWork.links.app" target="_blank">App link</a>
             </v-btn>
 
-            <v-btn color="purple" text>
-              <a
-                href="https://github.com/RyutaKojima/simpleGestures"
-                target="_blank"
-                >GitHub</a
-              >
+            <v-btn v-if="personalWork.links.github" color="purple" text>
+              <a :href="personalWork.links.github" target="_blank">GitHub</a>
             </v-btn>
 
             <v-spacer></v-spacer>
 
-            <v-btn icon @click="showCardDetail = !showCardDetail">
+            <v-btn
+              icon
+              @click="personalWork.showDetail = !personalWork.showDetail"
+            >
               <v-icon>{{
-                showCardDetail ? 'mdi-chevron-up' : 'mdi-chevron-down'
+                personalWork.showDetail ? 'mdi-chevron-up' : 'mdi-chevron-down'
               }}</v-icon>
             </v-btn>
           </v-card-actions>
 
           <v-expand-transition>
-            <div v-show="showCardDetail">
+            <div v-show="personalWork.showDetail">
               <v-divider></v-divider>
 
               <v-card-text>
-                Google Chromeでマウスジェスチャを行うための拡張機能です。
-                軽量/簡単な設定・操作を目指しています。
+                {{ personalWork.expansionDetail }}
               </v-card-text>
             </div>
           </v-expand-transition>
@@ -132,7 +124,6 @@ export default {
   components: {},
   data() {
     return {
-      showCardDetail: false,
       profile: {
         firstName: '竜太',
         lastName: '小島',
@@ -165,6 +156,25 @@ export default {
           color: 'green',
           name: 'Vue',
           yearsOfUse: 1
+        }
+      ],
+      personalWorks: [
+        {
+          title: 'simpleGestures',
+          imageUrl: '/works/thumb/simpleGestures.png',
+          description:
+            '<div>JavaScript / Chrome extension</div>\n' +
+            'マウスジェスチャ機能を提供するためのGoogle Chrome拡張機能です。\n' +
+            '軽量/簡単な設定・操作を目指しています。',
+          showDetail: false,
+          expansionDetail:
+            'Google Chromeでマウスジェスチャを行うための拡張機能です。\n' +
+            '軽量/簡単な設定・操作を目指しています。',
+          links: {
+            app:
+              'https://chrome.google.com/webstore/detail/flfminafiamnggnldfpilnfnmbgmiegn',
+            github: 'https://github.com/RyutaKojima/simpleGestures'
+          }
         }
       ]
     }
