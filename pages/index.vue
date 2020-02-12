@@ -23,7 +23,7 @@
             <v-chip :key="skill.name" class="ma-2" :color="skill.color">
               <v-icon left>mdi-fire</v-icon>
               {{ skill.name }}
-              <v-avatar right class="indigo darken-4">
+              <v-avatar right :color="skill.color" class="darken-4">
                 {{ skill.yearsOfUse }}
               </v-avatar>
             </v-chip>
