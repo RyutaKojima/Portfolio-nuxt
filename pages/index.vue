@@ -20,8 +20,13 @@
         </v-card-title>
         <v-card-text>
           <template v-for="skill in skills">
-            <v-chip :key="skill.name" class="ma-2" :color="skill.color">
-              <v-icon left>mdi-fire</v-icon>
+            <v-chip
+              :key="skill.name"
+              class="ma-2"
+              :color="skill.color"
+              v-on="on"
+            >
+              <v-icon left>{{ skill.icon }}</v-icon>
               {{ skill.name }}
               <v-avatar right :color="skill.color" class="darken-4">
                 {{ skill.yearsOfUse }}
@@ -36,9 +41,31 @@
         <v-card-title class="headline">
           職務経歴
         </v-card-title>
-        <v-card-text>
-          なんかいろいろ
-        </v-card-text>
+        <v-card>
+          <v-card-title>
+            セイルボート
+          </v-card-title>
+          <v-card-subtitle>
+            2015-09～現在
+          </v-card-subtitle>
+          <v-card-text>
+            <div>
+              不動産賃貸業務の業者間流通システム「キマRoom!」の追加機能開発・運用
+              電子申込顧客管理ツール「 キマRoom! Sign 」の新規開発・運用
+            </div>
+            <div>
+              前職で経験のなかった複数人でのチーム開発を経験しました。
+              フレームワークの利用も初めてであり、フレームワークの便利さやコーディング規約なども意識するようになりました。
+              前職では時間の限られた中手探りで勉強していたため、Webサービス構築の基本的な知識もここで身についたと思います。
+              チーム開発を通して、読みやすさやコードの意図を明確にすることを意識するようになりました。
+            </div>
+            <div>
+              PHP5.6 / HTML5 / JavaScript(ES5) / css / FuelPHP / jQuery /
+              Bootstrap / MySQL5.6 / memcached / Git / GitHub / Chatwork / Slack
+              / AWS(EC2/S3/RDB) / composer
+            </div>
+          </v-card-text>
+        </v-card>
       </v-card>
     </v-col>
     <v-col cols="12">
@@ -160,12 +187,32 @@ export default {
       skills: [
         {
           color: 'indigo',
+          icon: 'mdi-language-php',
           name: 'PHP',
-          yearsOfUse: 5
+          yearsOfUse: '5~'
+        },
+        {
+          color: 'mysql',
+          icon: '',
+          name: 'MySQL',
+          yearsOfUse: '5~'
+        },
+        {
+          color: 'javascript',
+          icon: 'mdi-language-javascript',
+          name: 'JavaScript',
+          yearsOfUse: '5~'
         },
         {
           color: 'green',
+          icon: 'mdi-vuejs',
           name: 'Vue',
+          yearsOfUse: 1
+        },
+        {
+          color: 'orange',
+          icon: 'mdi-fire',
+          name: 'Firebase',
           yearsOfUse: 1
         }
       ],
