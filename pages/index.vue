@@ -20,12 +20,7 @@
         </v-card-title>
         <v-card-text>
           <template v-for="skill in skills">
-            <v-chip
-              :key="skill.name"
-              class="ma-2"
-              :color="skill.color"
-              v-on="on"
-            >
+            <v-chip :key="skill.name" class="ma-2" :color="skill.color">
               <v-icon left>{{ skill.icon }}</v-icon>
               {{ skill.name }}
               <v-avatar right :color="skill.color" class="darken-4">
@@ -158,6 +153,8 @@
 </template>
 
 <script>
+import fetchEntries from '@/modules/apis'
+
 export default {
   components: {},
   data() {
@@ -184,38 +181,7 @@ export default {
           url: 'mailto:rkojima0213@gmail.com'
         }
       ],
-      skills: [
-        {
-          color: 'indigo',
-          icon: 'mdi-language-php',
-          name: 'PHP',
-          yearsOfUse: '5~'
-        },
-        {
-          color: 'mysql',
-          icon: '',
-          name: 'MySQL',
-          yearsOfUse: '5~'
-        },
-        {
-          color: 'javascript',
-          icon: 'mdi-language-javascript',
-          name: 'JavaScript',
-          yearsOfUse: '5~'
-        },
-        {
-          color: 'green',
-          icon: 'mdi-vuejs',
-          name: 'Vue',
-          yearsOfUse: 1
-        },
-        {
-          color: 'orange',
-          icon: 'mdi-fire',
-          name: 'Firebase',
-          yearsOfUse: 1
-        }
-      ],
+      skills: [],
       personalWorks: [
         {
           title: 'simpleGestures',
@@ -249,6 +215,24 @@ export default {
           }
         }
       ]
+    }
+  },
+  created() {
+    this.fetchSkills()
+  },
+  methods: {
+    async fetchSkills() {
+      const data = await fetchEntries()
+
+      const skills = data.items.map((value) => {
+        return {
+          name: value.fields.name,
+          icon: value.fields.icon,
+          color: value.fields.color,
+          yearsOfUse: value.fields.yearsOfUse
+        }
+      })
+      this.skills = skills
     }
   }
 }
