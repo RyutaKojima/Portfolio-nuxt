@@ -1,6 +1,13 @@
 import colors from 'vuetify/es5/util/colors'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export default {
+  env: {
+    SPACE_ID: process.env.SPACE_ID || 'xxx',
+    ACCESS_TOKEN: process.env.ACCESS_TOKEN || 'xxx'
+  },
   mode: 'spa',
   /*
    ** Headers of the page
