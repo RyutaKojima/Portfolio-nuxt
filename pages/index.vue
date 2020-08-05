@@ -93,7 +93,10 @@
             </v-card-title>
 
             <v-card-text>
-              <span v-html="personalWork.description"></span>
+              <div>
+                {{ personalWork.usingSkills.join('/') }}
+              </div>
+              <div>{{ personalWork.description }}</div>
             </v-card-text>
 
             <v-card-actions>
@@ -112,11 +115,13 @@
                 icon
                 @click="personalWork.showDetail = !personalWork.showDetail"
               >
-                <v-icon>{{
-                  personalWork.showDetail
-                    ? 'mdi-chevron-up'
-                    : 'mdi-chevron-down'
-                }}</v-icon>
+                <v-icon
+                  >{{
+                    personalWork.showDetail
+                      ? 'mdi-chevron-up'
+                      : 'mdi-chevron-down'
+                  }}
+                </v-icon>
               </v-btn>
             </v-card-actions>
 
@@ -187,8 +192,8 @@ export default {
           title: 'simpleGestures',
           iconUrl: '/works/icons/simpleGestures.png',
           imageUrl: '/works/thumbs/simpleGestures.png',
+          usingSkills: ['JavaScript', 'Chrome extension'],
           description:
-            '<div>JavaScript / Chrome extension</div>\n' +
             'マウスジェスチャ機能を提供するためのGoogle Chrome拡張機能です。\n' +
             '軽量/簡単な設定・操作を目指しています。',
           showDetail: false,
@@ -204,8 +209,8 @@ export default {
           title: 'MySQLSchemaDoc',
           iconUrl: '',
           imageUrl: '/works/thumbs/MySQLSchemaDoc.png',
+          usingSkills: ['MySQL', 'xsltproc', 'JavaScript', 'css'],
           description:
-            '<div>MySQL / xsltproc / JavaScript / css</div>\n' +
             'MySQLのDDLからテーブル定義書を作成するためのツールです。',
           showDetail: false,
           expansionDetail: '',
